@@ -20,7 +20,7 @@ export default function Step1(props: StepComponentProps) {
   useEffect(() => {
     // Prepara o bluetooth para a conexão
     // (verifica se está ligado, etc)
-    (async function () {
+    (async () => {
       try {
         await BleService.prepare();
       } catch (error) {
@@ -28,7 +28,7 @@ export default function Step1(props: StepComponentProps) {
       }
 
       setPreparing(false);
-    }());
+    })();
   }, []);
 
   // Função que irá conectar o celular ao dispositivo bluetooth

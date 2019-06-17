@@ -103,8 +103,8 @@ class TunerService {
   calculateDiffInCents(frequency: number | null): number | null {
     if (!frequency) return null;
 
+    // De acordo com a frequencia calcula qual nota é
     const value = Math.round(12 * (Math.log(frequency / MIDDLE_A) / Math.log(2))) + SEMITONE;
-
     const noteName = NOTE_STRINGS[value % 12].toLowerCase(); // Nome da nota (c, c#, d, d#...)
     const octave = Math.floor(value / 12) - 1; // Oitava da nota (1, 2, 3, 4...)
     const semitones = Distance.semitones(this.selectedNote, `${noteName}${octave}`); // Quantidade de semitons de distância da nota selecionada
