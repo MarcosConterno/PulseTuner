@@ -1,0 +1,37 @@
+algoritmo Passo1
+inicio
+    prepara_bluetooth()
+    conecta_bluetooth()
+    vai_para_passo_2()
+fim
+
+// -------------------------------------
+
+algoritmo Passo2
+inicio
+    seleciona_corda()
+    inicia_afinador()
+    vai_para_passo_3()
+fim
+
+// -------------------------------------
+
+algoritmo Passo3
+inicio
+    afinacao_atual = busca_afinacao()
+
+    enquanto(afinacao_atual != afinacao_desejada)
+        afinacao_atual = busca_afinacao()
+
+        se (afinacao_atual < afinacao_desejada)
+            envia_sinal_para_arduino_apertar()
+        senao
+            envia_sinal_para_arduino_soltar()
+        fim
+    fim
+
+    para_afinador()
+    mostra_mensagem_sucesso()
+    volta_para_passo_2()
+fim
+

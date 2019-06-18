@@ -10,6 +10,8 @@ const CENTS_TOLERANCE = 15;
 class TunerService {
   private static instance: TunerService;
 
+  private isTuning: boolean;
+
   private selectedNote: string;
 
   private centsSample: number[];
@@ -17,6 +19,7 @@ class TunerService {
   private firstNoteTime: number;
 
   private constructor() {
+    this.isTuning = false;
     this.selectedNote = '';
     this.centsSample = [];
     this.firstNoteTime = 0;
@@ -46,6 +49,8 @@ class TunerService {
   onNoteDetected: (diffInCents: number) => void;
   onTuningComplete: () => void;
   }) {
+    this.isTuning = true;
+
     Recording.init({
       bufferSize: 4096,
       sampleRate: 44100,
@@ -55,6 +60,8 @@ class TunerService {
 
     // Seta o evento ao encontrar uma frequência
     Recording.addRecordingEventListener((data: Float32Array) => {
+      if (!this.isTuning) return;
+
       const diffInCents = this.calculateDiffInCents(PitchService.detect(data));
 
       if (diffInCents !== null && this.checkDetectedNote(diffInCents)) {
@@ -125,6 +132,8 @@ class TunerService {
 
   // Para a afinação
   stop() {
+    this.isTuning = false;
+
     Recording.stop();
   }
 }

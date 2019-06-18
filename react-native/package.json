@@ -16,6 +16,7 @@
     "react-native-ble-plx": "^1.0.3",
     "react-native-linear-gradient": "^2.5.4",
     "react-native-recording": "^0.4.1",
+    "react-native-root-toast": "^3.1.1",
     "react-native-vector-icons": "^6.4.2",
     "styled-components": "^4.2.0",
     "tonal": "^2.2.2"

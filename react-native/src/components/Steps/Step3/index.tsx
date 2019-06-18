@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Button } from 'react-native';
+import Toast from 'react-native-root-toast';
 import { StepComponentProps } from '../StepComponentProps';
 import TunerService from '../../../services/TunerService';
 import BleService from '../../../services/BleService';
@@ -38,11 +39,20 @@ export default function Step3(props: StepComponentProps) {
   // Função chamada ao encontrar uma nota no afinador
   function onNoteDetected(diffInCents: number) {
     setDiffInCents(diffInCents);
+
     BleService.send(diffInCents.toString());
   }
 
   // Função chamada ao completar a afinação
   function onTuningComplete() {
+    Toast.show('Corda afinada com sucesso!', {
+      duration: 5000,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+    });
+
     props.goToPrev();
   }
 
